@@ -25,6 +25,6 @@ fi
 
 chown unbound:unbound /opt/unbound -R
 
-unbound-anchor -4 -r /root.hints -a /var/lib/unbound/trusted-key.key -c /var/lib/unbound/icannbundle.pem
+unbound-anchor -r /root.hints -a /var/lib/unbound/trusted-key.key -c /var/lib/unbound/icannbundle.pem
 
 exec /usr/sbin/unbound -d -p -c /etc/unbound/unbound.conf

@@ -11,7 +11,7 @@ RUN apk add --no-cache unbound curl ca-certificates s6 \
   && chmod 444 /root.hints \
   && chown unbound:unbound /var/lib/unbound -R \
   && chown unbound:unbound /opt/unbound -R \
-  && unbound-anchor -4 -r /root.hints -a /var/lib/unbound/trusted-key.key -c /var/lib/unbound/icannbundle.pem
+  && unbound-anchor -r /root.hints -a /var/lib/unbound/trusted-key.key -c /var/lib/unbound/icannbundle.pem
 
 COPY root/ /
 
