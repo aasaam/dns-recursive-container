@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  dns-recursive-container:
+    image: ghcr.io/aasaam/dns-recursive-container:latest
+    container_name: dns-recursive-container
+    hostname: dns-recursive-container
+    # custom forwarders
+    # volumes:
+    #   - ./forwarders.conf:/forwarders.conf:ro
+    environment:
+      # enable DNSSEC (Domain Name System Security Extensions) validation
+      - DNSSEC=1
+      # enable DOT (DNS over TLS)
+      - DOT=1
+    ports:
+      - "53:53/udp"
+      - "53:53"
