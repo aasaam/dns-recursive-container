@@ -1,6 +1,7 @@
 name: build
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
@@ -35,14 +36,14 @@ jobs:
 
       - shell: bash
         run: |  
-          docker build -f Dockerfile -t aasaam/dns-container .
-          docker push aasaam/dns-container
-          docker tag aasaam/dns-container ghcr.io/aasaam/dns-container:latest
-          docker push ghcr.io/aasaam/dns-container:latest
+          docker build -f Dockerfile -t aasaam/dns-recursive-container .
+          docker push aasaam/dns-recursive-container
+          docker tag aasaam/dns-recursive-container ghcr.io/aasaam/dns-recursive-container:latest
+          docker push ghcr.io/aasaam/dns-recursive-container:latest
 
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASS }}
-          repository: aasaam/dns-container
+          repository: aasaam/dns-recursive-container

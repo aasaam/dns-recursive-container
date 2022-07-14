@@ -14,7 +14,8 @@ RUN apk add --no-cache unbound curl ca-certificates s6 \
   && unbound-anchor -4 -r /root.hints -a /var/lib/unbound/trusted-key.key -c /var/lib/unbound/icannbundle.pem
 
 COPY root/ /
-RUN chmod a+x /service/*/run
+
+RUN ls -la / && chmod a+x /service/*/run
 
 EXPOSE 53/udp 53/tcp
 
