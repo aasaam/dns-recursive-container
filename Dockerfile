@@ -3,7 +3,7 @@ FROM alpine:edge
 ENV DNSSEC="1"
 ENV DOT="1"
 
-RUN apk add --no-cache unbound curl ca-certificates s6 \
+RUN apk add --no-cache unbound curl ca-certificates \
   && mkdir -p /var/lib/unbound \
   && mkdir -p /opt/unbound \
   && curl -Ls -o /root.hints https://www.internic.net/domain/named.cache \
@@ -14,9 +14,8 @@ RUN apk add --no-cache unbound curl ca-certificates s6 \
   && unbound-anchor -v -r /root.hints -a /var/lib/unbound/trusted-key.key -c /var/lib/unbound/icannbundle.pem || true
 
 COPY root/ /
-
-RUN chmod a+x /service/*/run
-
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 EXPOSE 53/udp 53/tcp
 
-ENTRYPOINT ["/bin/s6-svscan","/service"]
+ENTRYPOINT ["/entrypoint.sh"]

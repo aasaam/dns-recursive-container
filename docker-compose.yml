@@ -10,9 +10,9 @@ services:
     #   - ./forwarders.conf:/forwarders.conf:ro
     environment:
       # enable DNSSEC (Domain Name System Security Extensions) validation
-      - DNSSEC=1
+      - DNSSEC=0
       # enable DOT (DNS over TLS)
-      - DOT=1
+      - DOT=0
     ports:
-      - "53:53/udp"
-      - "53:53"
+      - "9553:53/udp"
+      - "9553:53"
