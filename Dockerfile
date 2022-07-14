@@ -1,7 +1,7 @@
 FROM alpine:edge
 
-ENV DNSSEC="1"
-ENV DOT="1"
+# STRICT_MODE will be enable DNSSEC with DOT
+ENV STRICT_MODE="1"
 
 COPY entrypoint.sh /entrypoint.sh
 
@@ -14,6 +14,7 @@ RUN apk add --no-cache unbound curl ca-certificates \
   && chown unbound:unbound /var/lib/unbound -R \
   && chown unbound:unbound /opt/unbound -R \
   && unbound-anchor -v -r /root.hints -a /var/lib/unbound/trusted-key.key -c /var/lib/unbound/icannbundle.pem || true \
+  && unbound -V \
   && chmod +x /entrypoint.sh
 
 COPY root/ /
