@@ -9,9 +9,14 @@ services:
     # volumes:
     #   - ./forwarders.conf:/forwarders.conf:ro
     #   - ./access.conf:/access.conf:ro
+    # env file include
+    env_file:
+      - ./.env
     environment:
       # enable DNSSEC (Domain Name System Security Extensions) validation and DOT (DNS over TLS)
       - STRICT_MODE=1
+
+    # expose
     network_mode: host
     # or expose just require ports
     # ports:
